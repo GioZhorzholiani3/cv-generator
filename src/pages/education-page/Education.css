@@ -1,0 +1,44 @@
+.wrap-edu-page {
+  display: flex;
+  height: 100vh;
+}
+
+.edu-left {
+  width: 60%;
+  background-color: rgb(246, 243, 238);
+}
+
+.edu-right {
+  width: 40%;
+  background-color: rgb(224, 223, 221);
+}
+
+.edu-head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.3rem;
+}
+.edu-text {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.edu-icon {
+  width: 10%;
+  margin-top: 10px;
+}
+
+.wrap-edu-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.edu-head-line {
+  height: 1px;
+  width: 100%;
+  background-color: rgb(100, 99, 99);
+  margin-top: 10px;
+}

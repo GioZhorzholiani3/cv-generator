@@ -1,0 +1,62 @@
+.edu-form {
+  width: 80%;
+
+  margin-top: 1rem;
+  /* margin: auto; */
+  margin-left: 15%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+.school-wraper {
+  display: flex;
+  flex-direction: column;
+}
+
+.school-wraper label {
+  font-size: 18px;
+}
+
+.education-input {
+  width: 100%;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+  height: 2rem;
+  margin: 9px 0;
+}
+
+.degree-wraper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.degree {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+}
+.degree select {
+  width: 100%;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+  height: 2rem;
+  margin: 9px 0;
+}
+
+.end-edu-date {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+}
+
+.end-edu-date input {
+  width: 100%;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+  height: 2rem;
+  margin: 9px 0;
+}
