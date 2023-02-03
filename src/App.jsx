@@ -1,8 +1,8 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import Welcome from "./pages/welcome-page/Welcome";
 import PersonalInfoPage from "./pages/personal-page/PersonalInfoPage";
-
-import { useState } from "react";
+import Experience from "./pages/experience-page/Experience";
+import Education from "./pages/education-page/Education";
 
 function App() {
   return (
@@ -10,6 +10,8 @@ function App() {
       <Route path="/" element={<Navigate to="/welcome" />} />
       <Route path="/welcome" element={<Welcome />} />
       <Route path="/personal-info" element={<PersonalInfoPage />} />
+      <Route path="/experience" element={<Experience />} />
+      <Route path="/education" element={<Education />} />
     </Routes>
   );
 }

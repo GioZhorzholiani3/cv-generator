@@ -1,0 +1,138 @@
+.exp-form {
+  width: 80%;
+
+  margin-top: 1rem;
+  /* margin: auto; */
+  margin-left: 15%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  /* margin-left: 5rem; */
+}
+
+.position-input {
+  width: 100%;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+  height: 2rem;
+  margin: 9px 0;
+}
+
+.position-wraper label {
+  font-size: 18px;
+}
+
+.form-group p {
+  font-size: 10px;
+  font-weight: 300;
+  line-height: 21px;
+  color: #7a7474;
+}
+
+.employer-wraper {
+  margin-top: 1rem;
+}
+.employer-input {
+  width: 100%;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+  height: 2rem;
+  margin: 9px 0;
+}
+
+.employer-wraper label {
+  font-size: 18px;
+}
+.date-wraper {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.start-date {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+}
+.end-date {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+.start-date label {
+  font-size: 18px;
+}
+
+.end-date input {
+  width: 100%;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+  height: 2rem;
+  margin: 9px 0;
+}
+
+.start-date input {
+  width: 100%;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+  height: 2rem;
+  margin: 9px 0;
+}
+
+.description-wraper {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.description-wraper textarea {
+  width: 100%;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+  height: 130px;
+  margin: 9px 0;
+  resize: none;
+}
+.exp-line {
+  border-bottom: 1px solid #bcbcbc;
+  margin-top: 1rem;
+}
+
+.add-experience-btn {
+  margin-top: 1rem;
+  width: 289px;
+  height: 48px;
+  background: #62a1eb;
+  border-radius: 4px;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.back-next {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.back-btn {
+  width: 113px;
+  height: 48px;
+  background: #6b40e3;
+  border-radius: 4px;
+  border: none;
+  color: white;
+}
+.next-btn {
+  width: 113px;
+  height: 48px;
+  background: #6b40e3;
+  border-radius: 4px;
+  border: none;
+  color: white;
+}
