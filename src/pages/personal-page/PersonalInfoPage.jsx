@@ -13,11 +13,17 @@ const PersonalInfoPage = () => {
     navigate("/experience");
   };
 
+  const moveStartPageHandler = (e) => {
+    e.preventDefault();
+    console.log("move start page");
+    navigate("/");
+  };
+
   return (
     <div className="personal-info-wraper">
       <div className="personal-info-left">
         <div className="wrap-form">
-          <div>
+          <div onClick={moveStartPageHandler} className="fisrt-page-icon">
             <AiOutlineLeft />
           </div>
           <div className="wrap-head">

@@ -3,7 +3,8 @@ import Welcome from "./pages/welcome-page/Welcome";
 import PersonalInfoPage from "./pages/personal-page/PersonalInfoPage";
 import Experience from "./pages/experience-page/Experience";
 import Education from "./pages/education-page/Education";
-import Resume from "../src/components/resume/Resume";
+
+import FinishPage from "./pages/finish-page/FinishPage";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
       <Route path="/personal-info" element={<PersonalInfoPage />} />
       <Route path="/experience" element={<Experience />} />
       <Route path="/education" element={<Education />} />
-      <Route path="/resume" element={<Resume />} />
+      <Route path="/resume" element={<FinishPage />} />
     </Routes>
   );
 }

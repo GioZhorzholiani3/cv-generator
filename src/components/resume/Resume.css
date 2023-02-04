@@ -1,0 +1,117 @@
+.wraper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.resume-info-wraper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.res-info-photo-wraper {
+  display: flex;
+  justify-content: space-between;
+}
+.resume-info-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.resume-name-surname {
+  display: flex;
+  font-size: 1.8rem;
+  color: rgb(205, 32, 32);
+}
+
+.res-surname {
+  margin-left: 2rem;
+}
+
+.resume-img {
+  display: flex;
+  border-radius: 50%;
+  background-color: brown;
+  height: 150px;
+  width: 150px;
+}
+
+.res-mail-wraper {
+  display: flex;
+}
+
+.res-mail-wraper p {
+  margin-top: 1rem;
+}
+.res-mail {
+  margin-left: 1rem;
+}
+
+.res-phone-wraper {
+  display: flex;
+}
+
+.res-phone-wraper p {
+  margin-top: 1rem;
+}
+
+.res-phone {
+  margin-left: 1rem;
+}
+
+/* .res-about-me {
+  margin-top: 1.5rem;
+} */
+
+.res-about-me label {
+  font-size: 1.6rem;
+  color: rgb(205, 32, 32);
+}
+
+.res-about-me p {
+  margin-top: 0.5rem;
+}
+
+.resume-exp-wraper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+.resume-exp-label {
+  color: rgb(205, 32, 32);
+  font-size: 1.6rem;
+}
+
+.resume-exp-wraper p {
+  margin-top: 0.5rem;
+}
+
+.res-exp-position {
+  font-weight: bolder;
+  font-size: 1rem;
+}
+
+.res-exp-date {
+  color: grey;
+}
+
+.res-education-wraper {
+  margin-top: 0.5rem;
+}
+.res-education-wraper p {
+  margin-top: 0.5rem;
+}
+
+.res-education-wraper label {
+  color: rgb(205, 32, 32);
+  font-size: 1.6rem;
+}
+
+.res-education-position {
+  font-weight: bolder;
+  font-size: 1rem;
+}
+
+.res-education-date {
+  color: grey;
+}

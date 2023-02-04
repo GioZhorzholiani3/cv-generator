@@ -1,8 +1,33 @@
 import React from "react";
 import "./EducationForm.css";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const EducationForm = () => {
+  const [degrees, setDegrees] = useState([]);
+
+  const [endEducationDate, setEndEducationDate] = useState("");
+
+  const [degreeValue, setDegreeValue] = useState("");
+
+  useEffect(() => {
+    const getDegrees = async () => {
+      const response = await fetch(
+        "https://resume.redberryinternship.ge/api/degrees"
+      );
+      const data = await response.json();
+      setDegrees(data);
+      console.log(data);
+    };
+    getDegrees();
+  }, []);
+
+  const selectDegree = (e) => {
+    setDegreeValue(e.target.value);
+    // console.log(e.target.value);
+  };
+
   const navigateNext = useNavigate();
 
   const navigatePrev = useNavigate();
@@ -18,6 +43,12 @@ const EducationForm = () => {
     console.log("next page");
     navigateNext("/resume");
   };
+
+  const getEduEndData = (e) => {
+    setEndEducationDate(e.target.value);
+    console.log(e.target.value);
+  };
+
   return (
     <div className="edu-form">
       <form>
@@ -36,15 +67,23 @@ const EducationForm = () => {
           <div className="degree-wraper">
             <div className="degree">
               <label htmlFor="degree">ხარსხი</label>
-              <select>
-                <option value="ბაკალავრი">ბაკალავრი</option>
-                <option value="მაგისტრი">მაგისტრი</option>
-                <option value="დოქტორი">დოქტორი</option>
+              <select onChange={selectDegree} placeholder="არიჩე ხარისხი">
+                <option hidden value={""}>
+                  აირჩიე ხარისხი
+                </option>
+                {degrees &&
+                  degrees.map((degree) => {
+                    return (
+                      <option key={degree.id} value={degree.title}>
+                        {degree.title}
+                      </option>
+                    );
+                  })}
               </select>
             </div>
             <div className="end-edu-date">
               <label htmlFor="end-edu-date">დასრულების თარიღი</label>
-              <input type="date" id="end-edu-date" />
+              <input onChange={getEduEndData} type="date" id="end-edu-date" />
             </div>
           </div>
 

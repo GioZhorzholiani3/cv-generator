@@ -1,0 +1,32 @@
+.last-page-wraper {
+  display: flex;
+  justify-content: end;
+  margin-top: 2rem;
+}
+
+.resume-wraper {
+  width: 60%;
+  margin-right: 1rem;
+  height: 94vh;
+  border: 1px solid #bcbcbc;
+  padding: 10px 20px;
+}
+
+.pop-up {
+  height: 80px;
+  width: 25%;
+  display: flex;
+  border-radius: 2px;
+  border: none;
+  background-color: rgb(224, 220, 220);
+  justify-content: center;
+  margin-right: 2rem;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn-close {
+  height: 40px;
+  font-size: 20px;
+  margin-left: 3rem;
+  cursor: pointer;
+}

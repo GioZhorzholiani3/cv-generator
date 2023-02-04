@@ -6,6 +6,7 @@
 .personal-info-right {
   width: 40%;
   background-color: rgb(224, 223, 221);
+  padding: 4px 16px;
 }
 .personal-info-wraper {
   display: flex;
@@ -194,5 +195,9 @@
   border-radius: 4px;
   border: none;
   color: #ffffff;
+  cursor: pointer;
+}
+
+.fisrt-page-icon {
   cursor: pointer;
 }
