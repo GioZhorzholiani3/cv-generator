@@ -12,6 +12,7 @@ const Experience = () => {
     e.preventDefault();
     console.log("move start page");
     navigate("/");
+    localStorage.clear();
   };
 
   return (

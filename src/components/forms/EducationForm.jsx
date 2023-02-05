@@ -6,10 +6,10 @@ import { useState } from "react";
 
 const EducationForm = () => {
   const [degrees, setDegrees] = useState([]);
-
+  const [school, setSchool] = useState("");
   const [endEducationDate, setEndEducationDate] = useState("");
-
   const [degreeValue, setDegreeValue] = useState("");
+  const [educationDescription, setEducationDescription] = useState("");
 
   useEffect(() => {
     const getDegrees = async () => {
@@ -23,9 +23,31 @@ const EducationForm = () => {
     getDegrees();
   }, []);
 
+  useEffect(() => {
+    setDegreeValue(localStorage.getItem("degreeValue"));
+    setSchool(localStorage.getItem("school"));
+    setEducationDescription(localStorage.getItem("educationDescription"));
+    setEndEducationDate(localStorage.getItem("endEducationDate"));
+  }, []);
+
+  const getEduEndDataHandler = (e) => {
+    setEndEducationDate(e.target.value);
+    localStorage.setItem("endEducationDate", e.target.value);
+  };
+
   const selectDegree = (e) => {
     setDegreeValue(e.target.value);
-    // console.log(e.target.value);
+    localStorage.setItem("degreeValue", e.target.value);
+  };
+
+  const schoolHandler = (e) => {
+    setSchool(e.target.value);
+    localStorage.setItem("school", e.target.value);
+  };
+
+  const educationDescriptionHandler = (e) => {
+    setEducationDescription(e.target.value);
+    localStorage.setItem("educationDescription", e.target.value);
   };
 
   const navigateNext = useNavigate();
@@ -44,11 +66,6 @@ const EducationForm = () => {
     navigateNext("/resume");
   };
 
-  const getEduEndData = (e) => {
-    setEndEducationDate(e.target.value);
-    console.log(e.target.value);
-  };
-
   return (
     <div className="edu-form">
       <form>
@@ -56,6 +73,8 @@ const EducationForm = () => {
           <div className="school-wraper">
             <label htmlFor="school">სასწავლებელი</label>
             <input
+              value={school}
+              onChange={schoolHandler}
               type="text"
               placeholder="სასწავლებელი"
               className="education-input"
@@ -67,7 +86,11 @@ const EducationForm = () => {
           <div className="degree-wraper">
             <div className="degree">
               <label htmlFor="degree">ხარსხი</label>
-              <select onChange={selectDegree} placeholder="არიჩე ხარისხი">
+              <select
+                value={degreeValue}
+                onChange={selectDegree}
+                placeholder="არიჩე ხარისხი"
+              >
                 <option hidden value={""}>
                   აირჩიე ხარისხი
                 </option>
@@ -83,13 +106,23 @@ const EducationForm = () => {
             </div>
             <div className="end-edu-date">
               <label htmlFor="end-edu-date">დასრულების თარიღი</label>
-              <input onChange={getEduEndData} type="date" id="end-edu-date" />
+              <input
+                value={endEducationDate}
+                onChange={getEduEndDataHandler}
+                type="date"
+                id="end-edu-date"
+              />
             </div>
           </div>
 
           <div className="description-wraper">
             <label htmlFor="description">აღწერა</label>
-            <textarea name="description" id="description"></textarea>
+            <textarea
+              value={educationDescription}
+              onChange={educationDescriptionHandler}
+              name="description"
+              id="description"
+            ></textarea>
           </div>
           <div className="exp-line"></div>
 

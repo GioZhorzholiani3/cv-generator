@@ -9,6 +9,7 @@ const FinishPage = () => {
   const goStartPage = (e) => {
     e.preventDefault();
     navigate("/");
+    localStorage.clear();
   };
   return (
     <div className="last-page-wraper">

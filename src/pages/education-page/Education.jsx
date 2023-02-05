@@ -11,6 +11,7 @@ const Education = () => {
   const moveStartPageHandler = (e) => {
     e.preventDefault();
     navigate("/");
+    localStorage.clear();
   };
 
   return (
