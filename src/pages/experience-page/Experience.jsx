@@ -5,7 +5,35 @@ import ExperienceForm from "../../components/forms/ExperienceForm";
 import { useNavigate } from "react-router-dom";
 import Resume from "../../components/resume/Resume";
 
+import { useState } from "react";
+
 const Experience = () => {
+  const [positionFromChild, setPositionFromChild] = useState("");
+  const [employeerFromChild, setEmployeerFromChild] = useState("");
+  const [workStartDateFromChild, setWorkStartDateFromChild] = useState("");
+  const [workEndDateFromChild, setWorkEndDateFromChild] = useState("");
+  const [workDescriptionFromChild, setWorkDescriptionFromChild] = useState("");
+
+  const handlePosition = (position) => {
+    setPositionFromChild(position);
+  };
+
+  const handleEmployeer = (employeer) => {
+    setEmployeerFromChild(employeer);
+  };
+
+  const handleWorkStartDate = (workStartDate) => {
+    setWorkStartDateFromChild(workStartDate);
+  };
+
+  const handleWorkEndDate = (workEndDate) => {
+    setWorkEndDateFromChild(workEndDate);
+  };
+
+  const handleWorkDescription = (workDescription) => {
+    setWorkDescriptionFromChild(workDescription);
+  };
+
   const navigate = useNavigate();
 
   const moveStartPageHandler = (e) => {
@@ -14,6 +42,8 @@ const Experience = () => {
     navigate("/");
     localStorage.clear();
   };
+
+  // console.log(workDescriptionFromChild);
 
   return (
     <div className="wrap-exp-page">
@@ -31,10 +61,24 @@ const Experience = () => {
           </div>
         </div>
 
-        {<ExperienceForm />}
+        {
+          <ExperienceForm
+            onPosition={handlePosition}
+            onEmployeer={handleEmployeer}
+            onWorkStartDate={handleWorkStartDate}
+            onWorkEndDate={handleWorkEndDate}
+            onWorkDescription={handleWorkDescription}
+          />
+        }
       </div>
       <div className="exp-right">
-        <Resume />
+        <Resume
+          onPosition={positionFromChild}
+          onEmployeer={employeerFromChild}
+          onWorkStartDate={workStartDateFromChild}
+          onWorkEndDate={workEndDateFromChild}
+          onWorkDescription={workDescriptionFromChild}
+        />
       </div>
     </div>
   );

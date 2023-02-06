@@ -147,7 +147,13 @@ const PersonalInfoPage = () => {
         </form>
       </div>
       <div className="personal-info-right">
-        <Resume />
+        <Resume
+          onName={name}
+          onSurname={surname}
+          onEmail={email}
+          onPhone={phone}
+          onAboutMe={aboutMe}
+        />
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useState } from "react";
 
-const ExperienceForm = () => {
+const ExperienceForm = (props) => {
   const [position, setPosition] = useState("");
   const [employer, setEmployer] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -22,26 +22,33 @@ const ExperienceForm = () => {
   const positionHandler = (e) => {
     setPosition(e.target.value);
     localStorage.setItem("position", e.target.value);
+    props.onPosition(e.target.value);
   };
 
   const employerHandler = (e) => {
     setEmployer(e.target.value);
     localStorage.setItem("employer", e.target.value);
+    props.onEmployeer(e.target.value);
   };
 
   const startDateHandler = (e) => {
     setStartDate(e.target.value);
     localStorage.setItem("startDate", e.target.value);
+    props.onWorkStartDate(e.target.value);
   };
 
   const endDateHandler = (e) => {
     setEndDate(e.target.value);
     localStorage.setItem("endDate", e.target.value);
+    props.onWorkEndDate(e.target.value);
+    // console.log(e.target.value);
   };
 
   const descriptionHandler = (e) => {
     setDescription(e.target.value);
     localStorage.setItem("description", e.target.value);
+    props.onWorkDescription(e.target.value);
+    // console.log(e.target.value);
   };
 
   const navigateNext = useNavigate();
@@ -67,7 +74,7 @@ const ExperienceForm = () => {
             <label htmlFor="positon">თანამდებობა</label>
             <input
               required
-              value={position}
+              value={position || ""}
               onChange={positionHandler}
               type="text"
               placeholder="დეველოპერი, დიზაინერი ა.შ"
@@ -80,7 +87,7 @@ const ExperienceForm = () => {
             <label htmlFor="employer">დამსაქმებელი</label>
             <input
               required
-              value={employer}
+              value={employer || ""}
               onChange={employerHandler}
               type="text"
               placeholder="დამსაქმებელი"
@@ -95,7 +102,7 @@ const ExperienceForm = () => {
               <label htmlFor="start-date-input">დაწყების თარიღი</label>
               <input
                 required
-                value={startDate}
+                value={startDate || ""}
                 onChange={startDateHandler}
                 type="date"
               />
@@ -104,7 +111,7 @@ const ExperienceForm = () => {
               <label htmlFor="end-date-input">დასრულების თარიღი</label>
               <input
                 required
-                value={endDate}
+                value={endDate || ""}
                 onChange={endDateHandler}
                 type="date"
               />
@@ -115,7 +122,7 @@ const ExperienceForm = () => {
             <label htmlFor="description">აღწერა</label>
             <textarea
               required
-              value={description}
+              value={description || ""}
               onChange={descriptionHandler}
               name="description"
               id="description"

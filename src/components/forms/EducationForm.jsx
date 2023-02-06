@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 
-const EducationForm = () => {
+const EducationForm = (props) => {
   const [degrees, setDegrees] = useState([]);
   const [school, setSchool] = useState("");
   const [endEducationDate, setEndEducationDate] = useState("");
@@ -18,7 +18,7 @@ const EducationForm = () => {
       );
       const data = await response.json();
       setDegrees(data);
-      console.log(data);
+      // console.log(data);
     };
     getDegrees();
   }, []);
@@ -33,21 +33,25 @@ const EducationForm = () => {
   const getEduEndDataHandler = (e) => {
     setEndEducationDate(e.target.value);
     localStorage.setItem("endEducationDate", e.target.value);
+    props.onSchoolEndDate(e.target.value);
   };
 
   const selectDegree = (e) => {
     setDegreeValue(e.target.value);
     localStorage.setItem("degreeValue", e.target.value);
+    props.onDegree(e.target.value);
   };
 
   const schoolHandler = (e) => {
     setSchool(e.target.value);
     localStorage.setItem("school", e.target.value);
+    props.onSchool(e.target.value);
   };
 
   const educationDescriptionHandler = (e) => {
     setEducationDescription(e.target.value);
     localStorage.setItem("educationDescription", e.target.value);
+    props.onSchoolDescription(e.target.value);
   };
 
   const navigateNext = useNavigate();
@@ -73,7 +77,7 @@ const EducationForm = () => {
           <div className="school-wraper">
             <label htmlFor="school">სასწავლებელი</label>
             <input
-              value={school}
+              value={school || ""}
               onChange={schoolHandler}
               type="text"
               placeholder="სასწავლებელი"
@@ -87,7 +91,7 @@ const EducationForm = () => {
             <div className="degree">
               <label htmlFor="degree">ხარსხი</label>
               <select
-                value={degreeValue}
+                value={degreeValue || ""}
                 onChange={selectDegree}
                 placeholder="არიჩე ხარისხი"
               >
@@ -107,7 +111,7 @@ const EducationForm = () => {
             <div className="end-edu-date">
               <label htmlFor="end-edu-date">დასრულების თარიღი</label>
               <input
-                value={endEducationDate}
+                value={endEducationDate || ""}
                 onChange={getEduEndDataHandler}
                 type="date"
                 id="end-edu-date"
@@ -118,7 +122,7 @@ const EducationForm = () => {
           <div className="description-wraper">
             <label htmlFor="description">აღწერა</label>
             <textarea
-              value={educationDescription}
+              value={educationDescription || ""}
               onChange={educationDescriptionHandler}
               name="description"
               id="description"

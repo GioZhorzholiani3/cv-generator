@@ -7,10 +7,12 @@
 .resume-info-wraper {
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 .res-info-photo-wraper {
   display: flex;
+  width: 100%;
   justify-content: space-between;
 }
 .resume-info-text {
@@ -114,4 +116,8 @@
 
 .res-education-date {
   color: grey;
+}
+
+.wrap-start-end-date {
+  display: flex;
 }
