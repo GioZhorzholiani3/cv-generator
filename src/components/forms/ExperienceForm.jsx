@@ -10,6 +10,13 @@ const ExperienceForm = (props) => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [description, setDescription] = useState("");
+  const [errorMessage, setErrorMessage] = useState({
+    position: "",
+    employeer: "",
+    startDate: "",
+    endDate: "",
+    description: "",
+  });
 
   useEffect(() => {
     setPosition(localStorage.getItem("position"));
@@ -64,7 +71,53 @@ const ExperienceForm = (props) => {
   const nextPageHandler = (e) => {
     e.preventDefault();
     console.log("next page");
-    navigateNext("/education");
+    // navigateNext("/education");
+
+    let errors = {
+      position: "",
+      employeer: "",
+      startDate: "",
+      endDate: "",
+      description: "",
+    };
+
+    if (!position) {
+      errors.position = "თანამდებობა აუცილებელია";
+    } else if (position.length < 2) {
+      errors.position = "მინიმუმ 2 სიმბოლო";
+    }
+
+    if (!employer) {
+      errors.employeer = "დამსაქმებელი აუცილებელია";
+    } else if (employer.length < 2) {
+      errors.employeer = "მინიმუმ 2 სიმბოლო";
+    }
+
+    if (!startDate) {
+      errors.startDate = "დაწყების თარიღი აუცილებელია";
+    }
+
+    if (!endDate) {
+      errors.endDate = "დასრულების თარიღი აუცილებელია";
+    }
+
+    if (!description) {
+      errors.description = "აღწერა აუცილებელია";
+    } else if (description.length < 2) {
+      errors.description = "მინიმუმ 2 სიმბოლო";
+    }
+
+    setErrorMessage(errors);
+
+    if (
+      !errors.position &&
+      !errors.employeer &&
+      !errors.startDate &&
+      !errors.endDate &&
+      !errors.description
+    ) {
+      navigateNext("/education");
+    }
   };
   return (
     <div className="exp-form">
@@ -80,8 +133,12 @@ const ExperienceForm = (props) => {
               placeholder="დეველოპერი, დიზაინერი ა.შ"
               className="position-input"
               id="positon"
+              style={errorMessage.position ? { border: "1px solid red" } : null}
             />
-            <p>მინიმუმ 2 სიმბოლო</p>
+            {errorMessage.position && (
+              <span className="error-message">{errorMessage.position}</span>
+            )}
+            {!errorMessage.position && <p>მინიმუმ 2 სიმბოლო</p>}
           </div>
           <div className="employer-wraper">
             <label htmlFor="employer">დამსაქმებელი</label>
@@ -93,8 +150,14 @@ const ExperienceForm = (props) => {
               placeholder="დამსაქმებელი"
               className="employer-input"
               id="employer"
+              style={
+                errorMessage.employeer ? { border: "1px solid red" } : null
+              }
             />
-            <p>მინიმუმ 2 სიმბოლო</p>
+            {errorMessage.employeer && (
+              <span className="error-message">{errorMessage.employeer}</span>
+            )}
+            {!errorMessage.employeer && <p>მინიმუმ 2 სიმბოლო</p>}
           </div>
 
           <div className="date-wraper">
@@ -105,7 +168,13 @@ const ExperienceForm = (props) => {
                 value={startDate || ""}
                 onChange={startDateHandler}
                 type="date"
+                style={
+                  errorMessage.startDate ? { border: "1px solid red" } : null
+                }
               />
+              {errorMessage.startDate && (
+                <span className="error-message"> {errorMessage.startDate}</span>
+              )}
             </div>
             <div className="end-date">
               <label htmlFor="end-date-input">დასრულების თარიღი</label>
@@ -114,7 +183,13 @@ const ExperienceForm = (props) => {
                 value={endDate || ""}
                 onChange={endDateHandler}
                 type="date"
+                style={
+                  errorMessage.endDate ? { border: "1px solid red" } : null
+                }
               />
+              {errorMessage.endDate && (
+                <span className="error-message"> {errorMessage.endDate}</span>
+              )}
             </div>
           </div>
 
@@ -126,7 +201,13 @@ const ExperienceForm = (props) => {
               onChange={descriptionHandler}
               name="description"
               id="description"
+              style={
+                errorMessage.description ? { border: "1px solid red" } : null
+              }
             ></textarea>
+            {errorMessage.description && (
+              <span className="error-message"> {errorMessage.description}</span>
+            )}
           </div>
           <div className="exp-line"></div>
 

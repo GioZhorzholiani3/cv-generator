@@ -60,3 +60,8 @@
   height: 2rem;
   margin: 9px 0;
 }
+.error-message {
+  color: red;
+  font-size: 10px;
+  margin-top: 0.5rem;
+}

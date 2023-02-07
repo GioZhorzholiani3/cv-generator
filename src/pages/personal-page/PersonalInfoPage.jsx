@@ -11,6 +11,17 @@ const PersonalInfoPage = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [aboutMe, setAboutMe] = useState("");
+  const [errorMessage, setErrorMessage] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+  });
+
+  // const [nameValid, setNameValid] = useState(false);
+  // const [surnameValid, setSurnameValid] = useState(false);
+  // const [emailValid, setEmailValid] = useState(false);
+  // const [phoneValid, setPhoneValid] = useState(false);
 
   useEffect(() => {
     setName(localStorage.getItem("name"));
@@ -50,7 +61,84 @@ const PersonalInfoPage = () => {
   const nextPageHandler = (e) => {
     e.preventDefault();
     console.log("next page");
-    navigate("/experience");
+
+    // console.log(nameValid, surnameValid, emailValid, phoneValid);
+    console.log(errorMessage);
+    // console.log(
+    //   errorMessage.firstName,
+    //   errorMessage.lastName,
+    //   errorMessage.email,
+    //   errorMessage.phoneNumber
+    // );
+
+    let errors = { firstName: "", lastName: "", email: "", phoneNumber: "" };
+    const georgianAlphabet = "აბგდევზთიკლმნოპჟრსტუფქღყშჩცძწჭხჯჰ";
+
+    //firstname validation
+    if (!name) {
+      // setNameValid(false);
+
+      errors.firstName = "სახელი აუცილებელია";
+    } else if (name.length < 2) {
+      // setNameValid(false);
+
+      errors.firstName = "მინიმუმ 2 ქართული ასოები";
+    } else if (
+      !name.split("").every((letter) => georgianAlphabet.includes(letter))
+    ) {
+      // setNameValid(false);
+      errors.firstName = "მხოლოდ ქართული ასოებია ნებადართული";
+    }
+
+    //lastname validation
+
+    if (!surname) {
+      // setSurnameValid(false);
+
+      errors.lastName = "გვარი აუცილებელია";
+    } else if (surname.length < 2) {
+      // setSurnameValid(false);
+      errors.lastName = "მინიმუმ 2 ქართული ასოები";
+    } else if (
+      !surname.split("").every((letter) => georgianAlphabet.includes(letter))
+    ) {
+      // setSurnameValid(false);
+      errors.lastName = "მხოლოდ ქართული ასოებია ნებადართული";
+    }
+
+    //email validation
+
+    if (!email) {
+      // setEmailValid(false);
+      errors.email = "ელ.ფოსტა აუცილებელია";
+    } else if (!email.endsWith("@redberry.com")) {
+      // setEmailValid(false);
+      errors.email = "ელ.ფოსტა უნდა დასრულდეს @redberry.com-ით";
+    }
+
+    //phone validation
+    if (!phone) {
+      errors.phoneNumber = "ნომერი აუცილებელია";
+    } else if (phone && phone.substr(0, 4) !== "+995") {
+      errors.phoneNumber = "ნომერი უნდა იწყებოდეს +995-ით";
+    } else if (phone && phone.length > 13) {
+      errors.phoneNumber = "ნომერი გრძელია";
+    } else if (phone && phone.length < 13) {
+      errors.phoneNumber = "ნომერი მოკლეა";
+    } else {
+      // setPhoneValid(true);
+    }
+
+    setErrorMessage(errors);
+
+    if (
+      !errors.firstName &&
+      !errors.lastName &&
+      !errors.email &&
+      !errors.phoneNumber
+    ) {
+      navigate("/experience");
+    }
   };
 
   const moveStartPageHandler = (e) => {
@@ -85,8 +173,15 @@ const PersonalInfoPage = () => {
                 type="text"
                 id="name"
                 value={name || ""}
+                style={
+                  errorMessage.firstName ? { border: "1px solid red" } : null
+                }
               />
-              <span>მინიმუმ 2 ქართული ასოები</span>
+              {errorMessage.firstName && (
+                <p className="error-message">{errorMessage.firstName}</p>
+              )}
+
+              {!errorMessage.firstName && <span>მინიმუმ 2 ქართული ასო</span>}
             </div>
 
             <div className="name-right">
@@ -98,8 +193,15 @@ const PersonalInfoPage = () => {
                 type="text"
                 id="surname"
                 value={surname || ""}
+                style={
+                  errorMessage.lastName ? { border: "1px solid red" } : null
+                }
               />
-              <span>მინიმუმ 2 ქართული ასოები</span>
+              {errorMessage.lastName && (
+                <p className="error-message">{errorMessage.lastName}</p>
+              )}
+
+              {!errorMessage.lastName && <span>მინიმუმ 2 ქართული ასო</span>}
             </div>
           </div>
           <div className="photo-upload">
@@ -126,8 +228,16 @@ const PersonalInfoPage = () => {
               type="email"
               id="email"
               value={email || ""}
+              style={errorMessage.email ? { border: "1px solid red" } : null}
             />
-            <span> უნდა მთავრდებოდეს @redberry.ge-ით </span>
+            {errorMessage.email && (
+              <p className="error-message">{errorMessage.email}</p>
+            )}
+
+            {!errorMessage.email && (
+              <span>უნდა მთავრდებოდეს @redberry.ge-ით</span>
+            )}
+            {/* <span> უნდა მთავრდებოდეს @redberry.ge-ით </span> */}
           </div>
           <div className="phone">
             <label htmlFor="phone">მობილურის ნომერი</label>
@@ -138,8 +248,18 @@ const PersonalInfoPage = () => {
               type="text"
               id="phone"
               value={phone || ""}
+              style={
+                errorMessage.phoneNumber ? { border: "1px solid red" } : null
+              }
             />
-            <span> უნდა აკმაყოფილებდეს ქართული მობილური ნომრის ფორმატს </span>
+            {errorMessage.phoneNumber && (
+              <p className="error-message">{errorMessage.phoneNumber}</p>
+            )}
+
+            {!errorMessage.phoneNumber && (
+              <span>უნდა აკმაყოფილებდეს ქართული მობილური ნომრის ფორმატს</span>
+            )}
+            {/* <span> უნდა აკმაყოფილებდეს ქართული მობილური ნომრის ფორმატს </span> */}
           </div>
           <div className="next">
             <button onClick={nextPageHandler}>შემდეგი</button>

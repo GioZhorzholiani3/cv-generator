@@ -10,6 +10,12 @@ const EducationForm = (props) => {
   const [endEducationDate, setEndEducationDate] = useState("");
   const [degreeValue, setDegreeValue] = useState("");
   const [educationDescription, setEducationDescription] = useState("");
+  const [errorMessage, setErrorMessage] = useState({
+    school: "",
+    endEducationDate: "",
+    degreeValue: "",
+    educationDescription: "",
+  });
 
   useEffect(() => {
     const getDegrees = async () => {
@@ -67,7 +73,44 @@ const EducationForm = (props) => {
   const nextPageHandler = (e) => {
     e.preventDefault();
     console.log("next page");
-    navigateNext("/resume");
+    // navigateNext("/resume");
+    let errors = {
+      school: "",
+      endEducationDate: "",
+      degreeValue: "",
+      educationDescription: "",
+    };
+
+    if (!school) {
+      errors.school = "შევსება აუცილებელია";
+    } else if (school.length < 2) {
+      errors.school = " შეიყვანე მინიმუმ 2 სიმბოლო";
+    }
+
+    if (!endEducationDate) {
+      errors.endEducationDate = "შევსება აუცილებელია";
+    }
+
+    if (!degreeValue) {
+      errors.degreeValue = "ხარისხის მითითება აუცილებელია";
+    }
+
+    if (!educationDescription) {
+      errors.educationDescription = "შევსება აუცილებელია";
+    } else if (educationDescription.length < 2) {
+      errors.educationDescription = " შეიყვანე მინიმუმ 2 სიმბოლო";
+    }
+
+    setErrorMessage(errors);
+
+    if (
+      !errors.school &&
+      !errors.endEducationDate &&
+      !errors.degreeValue &&
+      !errors.educationDescription
+    ) {
+      navigateNext("/resume");
+    }
   };
 
   return (
@@ -83,8 +126,12 @@ const EducationForm = (props) => {
               placeholder="სასწავლებელი"
               className="education-input"
               id="education"
+              style={errorMessage.school ? { border: "1px solid red" } : null}
             />
-            <p>მინიმუმ 2 სიმბოლო</p>
+            {errorMessage.school && (
+              <span className="error-message">{errorMessage.school}</span>
+            )}
+            {!errorMessage.school && <p>მინიმუმ 2 სიმბოლო</p>}
           </div>
 
           <div className="degree-wraper">
@@ -94,6 +141,9 @@ const EducationForm = (props) => {
                 value={degreeValue || ""}
                 onChange={selectDegree}
                 placeholder="არიჩე ხარისხი"
+                style={
+                  errorMessage.degreeValue ? { border: "1px solid red" } : null
+                }
               >
                 <option hidden value={""}>
                   აირჩიე ხარისხი
@@ -115,7 +165,17 @@ const EducationForm = (props) => {
                 onChange={getEduEndDataHandler}
                 type="date"
                 id="end-edu-date"
+                style={
+                  errorMessage.endEducationDate
+                    ? { border: "1px solid red" }
+                    : null
+                }
               />
+              {errorMessage.endEducationDate && (
+                <span className="error-message">
+                  {errorMessage.endEducationDate}
+                </span>
+              )}
             </div>
           </div>
 
@@ -126,7 +186,17 @@ const EducationForm = (props) => {
               onChange={educationDescriptionHandler}
               name="description"
               id="description"
+              style={
+                errorMessage.educationDescription
+                  ? { border: "1px solid red" }
+                  : null
+              }
             ></textarea>
+            {errorMessage.educationDescription && (
+              <span className="error-message">
+                {errorMessage.educationDescription}
+              </span>
+            )}
           </div>
           <div className="exp-line"></div>
 
