@@ -53,37 +53,47 @@ const Resume = (props) => {
                 </h2>
               </div>
               <div className="res-mail-wraper">
-                <p>
-                  <MdAlternateEmail />
-                </p>
+                {(props.onEmail || resumeEmail) && (
+                  <p>
+                    <MdAlternateEmail />
+                  </p>
+                )}
                 <p className="res-mail">
                   {props.onEmail ? props.onEmail : resumeEmail}
                 </p>
               </div>
               <div className="res-phone-wraper">
-                <p>
-                  <AiOutlinePhone />
-                </p>
+                {(props.onPhone || resumePhone) && (
+                  <p>
+                    <AiOutlinePhone />
+                  </p>
+                )}
                 <p className="res-phone">
                   {props.onPhone ? props.onPhone : resumePhone}
                 </p>
               </div>
             </div>
-            {/* <div className="resume-img">
-              <img src="" alt="IMG-20200925-134000" border="0" />
-            </div> */}
           </div>
           <div className="res-about-me">
-            <label>ჩემს შესახებ</label>
+            {(props.onAboutMe || resumeAboutMe) && <label>ჩემს შესახებ</label>}
             <p>{props.onAboutMe ? props.onAboutMe : resumeAboutMe}</p>
           </div>
         </div>
-        <div className="resume-img">
-          <img src="" alt="IMG-20200925-134000" border="0" />
-        </div>
+        <div className="resume-img"></div>
       </div>
       <div className="resume-exp-wraper">
-        <label className="resume-exp-label">გამოცდილება</label>
+        {(props.onPosition ||
+          props.onEmployeer ||
+          props.onWorkEndDate ||
+          props.onWorkDescription ||
+          props.onWorkStartDate ||
+          resumePosition ||
+          resumeEmployeer ||
+          resWorkStartDate ||
+          resWorkEndDate ||
+          resWorkDescription) && (
+          <label className="resume-exp-label">გამოცდილება</label>
+        )}
         <p className="res-exp-position">
           {props.onPosition ? props.onPosition : resumePosition}
           {(props.onPosition || resumePosition) && " , "}
@@ -106,7 +116,16 @@ const Resume = (props) => {
         </p>
       </div>
       <div className="res-education-wraper">
-        <label className="res-education-label">განათლება</label>
+        {(props.onSchool ||
+          props.onDegree ||
+          props.onSchoolEndDate ||
+          props.onSchoolDescription ||
+          resSchool ||
+          resSchoolDegree ||
+          resSchoolEndDate ||
+          resEducationDescription) && (
+          <label className="res-education-label">განათლება</label>
+        )}
         <p className="res-education-position">
           {props.onSchool ? props.onSchool : resSchool}
           {(props.onSchool || resSchool) && " , "}

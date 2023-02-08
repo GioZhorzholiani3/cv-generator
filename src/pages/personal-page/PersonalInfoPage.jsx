@@ -111,9 +111,9 @@ const PersonalInfoPage = () => {
     if (!email) {
       // setEmailValid(false);
       errors.email = "ელ.ფოსტა აუცილებელია";
-    } else if (!email.endsWith("@redberry.com")) {
+    } else if (!email.endsWith("@redberry.ge")) {
       // setEmailValid(false);
-      errors.email = "ელ.ფოსტა უნდა დასრულდეს @redberry.com-ით";
+      errors.email = "ელ.ფოსტა უნდა დასრულდეს @redberry.ge-ით";
     }
 
     //phone validation
