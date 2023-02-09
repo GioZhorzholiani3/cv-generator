@@ -21,6 +21,17 @@ const Resume = (props) => {
     setResSchoolDegree(localStorage.getItem("degreeValue"));
     setResSchoolEndDate(localStorage.getItem("endEducationDate"));
     setResEducationDescription(localStorage.getItem("educationDescription"));
+    // setImage(localStorage.getItem("selectedImage"));
+
+    // const storedImage = localStorage.getItem("selectedImage");
+    // if (storedImage) {
+    //   setImage(URL.createObjectURL(storedImage));
+    // }
+
+    const storedImage = localStorage.getItem("selectedImage");
+    if (storedImage) {
+      setImage(storedImage);
+    }
   }, []);
 
   const [resumeName, setResumeName] = useState("");
@@ -37,8 +48,17 @@ const Resume = (props) => {
   const [resSchoolDegree, setResSchoolDegree] = useState("");
   const [resSchoolEndDate, setResSchoolEndDate] = useState("");
   const [resEducationDescription, setResEducationDescription] = useState("");
+  const [image, setImage] = useState("");
 
   // console.log(props.onWorkDesctiption);
+
+  const style = {
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundImage: props.onImage ? `url(${props.onImage})` : `url(${image})`,
+  };
+
+  // console.log(image);
 
   return (
     <div className="wraper">
@@ -79,7 +99,7 @@ const Resume = (props) => {
             <p>{props.onAboutMe ? props.onAboutMe : resumeAboutMe}</p>
           </div>
         </div>
-        <div className="resume-img"></div>
+        <div className="resume-img" style={style}></div>
       </div>
       <div className="resume-exp-wraper">
         {(props.onPosition ||

@@ -22,7 +22,7 @@
 
 .resume-name-surname {
   display: flex;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   color: rgb(205, 32, 32);
 }
 
@@ -33,7 +33,7 @@
 .resume-img {
   display: flex;
   border-radius: 50%;
-  background-color: brown;
+  /* background-color: brown; */
   height: 150px;
   width: 150px;
 }

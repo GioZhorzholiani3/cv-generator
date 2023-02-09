@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { useState } from "react";
 import Resume from "../../components/resume/Resume";
 import "./PersonalInfoPage.css";
@@ -11,11 +11,15 @@ const PersonalInfoPage = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [aboutMe, setAboutMe] = useState("");
+
+  const [selectedImage, setSelectedImage] = useState("");
+
   const [errorMessage, setErrorMessage] = useState({
     firstName: "",
     lastName: "",
     email: "",
     phoneNumber: "",
+    image: "",
   });
 
   // const [nameValid, setNameValid] = useState(false);
@@ -29,7 +33,26 @@ const PersonalInfoPage = () => {
     setEmail(localStorage.getItem("email"));
     setPhone(localStorage.getItem("phone"));
     setAboutMe(localStorage.getItem("aboutMe"));
+    setSelectedImage(localStorage.getItem("selectedImage"));
   }, []);
+
+  // const handleImageSelect = (event) => {
+  //   // setSelectedImage((event.target.files[0]));
+  //   setSelectedImage(URL.createObjectURL(event.target.files[0]));
+  //   localStorage.setItem("selectedImage", event.target.files[0]);
+  // };
+
+  const handleImageSelect = (event) => {
+    const image = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      setSelectedImage(reader.result);
+      localStorage.setItem("selectedImage", reader.result);
+    };
+
+    reader.readAsDataURL(image);
+  };
 
   const nameInputHandler = (e) => {
     setName(e.target.value);
@@ -71,7 +94,13 @@ const PersonalInfoPage = () => {
     //   errorMessage.phoneNumber
     // );
 
-    let errors = { firstName: "", lastName: "", email: "", phoneNumber: "" };
+    let errors = {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phoneNumber: "",
+      image: "",
+    };
     const georgianAlphabet = "აბგდევზთიკლმნოპჟრსტუფქღყშჩცძწჭხჯჰ";
 
     //firstname validation
@@ -131,11 +160,18 @@ const PersonalInfoPage = () => {
 
     setErrorMessage(errors);
 
+    //image validation
+
+    if (!selectedImage) {
+      errors.image = "ფოტო აუცილებელია";
+    }
+
     if (
       !errors.firstName &&
       !errors.lastName &&
       !errors.email &&
-      !errors.phoneNumber
+      !errors.phoneNumber &&
+      !errors.image
     ) {
       navigate("/experience");
     }
@@ -205,8 +241,38 @@ const PersonalInfoPage = () => {
             </div>
           </div>
           <div className="photo-upload">
-            <label htmlFor="photo">პირადი ფოტოს ატვირთვა</label>
-            <button required>ფოტოს ატვირთვა</button>
+            <label>პირადი ფოტოს ატვირთვა</label>
+            {/* <button onClick={imageHandler} required>
+              ფოტოს ატვირთვა
+            </button> */}
+            {/* <button onChange={handleFileChange} accept="image/*">
+              atvirtva
+            </button> */}
+            {/* <div> */}
+            <input
+              type="file"
+              id="photo"
+              onChange={handleImageSelect}
+              accept="image/*"
+            />
+            <label
+              className="photo-btn"
+              htmlFor="photo"
+              style={errorMessage.image ? { border: "1px solid red" } : null}
+            >
+              ფოტოს არჩევა
+            </label>
+            {errorMessage.image && (
+              <p className="error-message">{errorMessage.image}</p>
+            )}
+            {/* {selectedImage && <p>{selectedImage.name}</p>}
+            </div> */}
+            {/* {selectedImage && (
+              <div>
+                <p>Selected Image:</p>
+                <img src={selectedImage} alt="Selected" />
+              </div>
+            )} */}
           </div>
           <div className="about-me">
             <p>ჩემ შესახებ (არასავალდებულო)</p>
@@ -273,6 +339,7 @@ const PersonalInfoPage = () => {
           onEmail={email}
           onPhone={phone}
           onAboutMe={aboutMe}
+          onImage={selectedImage}
         />
       </div>
     </div>
