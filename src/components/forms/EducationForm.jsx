@@ -8,6 +8,7 @@ const EducationForm = (props) => {
   const [degrees, setDegrees] = useState([]);
   const [school, setSchool] = useState("");
   const [endEducationDate, setEndEducationDate] = useState("");
+
   const [degreeValue, setDegreeValue] = useState("");
   const [educationDescription, setEducationDescription] = useState("");
   const [errorMessage, setErrorMessage] = useState({
@@ -16,6 +17,24 @@ const EducationForm = (props) => {
     degreeValue: "",
     educationDescription: "",
   });
+
+  // useEffect(() => {
+  //   const name = localStorage.getItem("name");
+  //   const surname = localStorage.getItem("surname");
+  //   const email = localStorage.getItem("email");
+  //   const phone = localStorage.getItem("phone");
+  //   const aboutMe = localStorage.getItem("aboutMe");
+  //   const position = localStorage.getItem("position");
+  //   const employer = localStorage.getItem("employer");
+  //   const startDate = localStorage.getItem("startDate");
+  //   const endDate = localStorage.getItem("endDate");
+  //   const description = localStorage.getItem("description");
+  //   const school = localStorage.getItem("school");
+  //   const degreeValue = localStorage.getItem("degreeValue");
+  //   const endEducationDate = localStorage.getItem("endEducationDate");
+  //   const educationDescription = localStorage.getItem("educationDescription");
+  //   const storedImage = localStorage.getItem("selectedImage");
+  // }, []);
 
   useEffect(() => {
     const getDegrees = async () => {
@@ -101,6 +120,37 @@ const EducationForm = (props) => {
       errors.educationDescription = " შეიყვანე მინიმუმ 2 სიმბოლო";
     }
 
+    let degreeValueID;
+
+    switch (localStorage.getItem("degreeValue")) {
+      case "საშუალო სკოლის დიპლომი":
+        degreeValueID = 1;
+        break;
+      case "ზოგადსაგანმანათლებლო დიპლომი":
+        degreeValueID = 2;
+        break;
+      case "ბაკალავრი":
+        degreeValueID = 3;
+        break;
+      case "მაგისტრი":
+        degreeValueID = 4;
+        break;
+      case "დოქტორი":
+        degreeValueID = 5;
+        break;
+      case "ასოცირებული ხარისხი":
+        degreeValueID = 6;
+        break;
+      case "კოლეჯი(ხარისიხს გარეშე)":
+        degreeValueID = 7;
+        break;
+      case "სხვა":
+        degreeValueID = 8;
+        break;
+      default:
+        degreeValueID = 0;
+    }
+
     setErrorMessage(errors);
 
     if (
@@ -109,6 +159,120 @@ const EducationForm = (props) => {
       !errors.degreeValue &&
       !errors.educationDescription
     ) {
+      const postData = async () => {
+        // const imageFile = localStorage.getItem("selectedImage");
+        // const imageBlob = new Blob([imageFile], { type: "image/jpeg" });
+
+        // const image = new Blob([localStorage.getItem("selectedImage")], {
+        //   type: "image/jpeg",
+        // });
+        const response = await fetch(
+          "https://resume.redberryinternship.ge/api/cvs",
+          {
+            method: "POST",
+            headers: {
+              "Content-type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              token: localStorage.getItem("token"),
+              name: localStorage.getItem("name"),
+              surname: localStorage.getItem("surname"),
+              email: localStorage.getItem("email"),
+              phone_number: localStorage.getItem("phone"),
+              experiences: [
+                {
+                  position: localStorage.getItem("position"),
+                  employer: localStorage.getItem("employer"),
+                  start_date: localStorage.getItem("startDate"),
+                  due_date: localStorage.getItem("endDate"),
+                  description: localStorage.getItem("description"),
+                },
+              ],
+              educations: [
+                {
+                  degree_id: degreeValueID,
+                  institute: localStorage.getItem("school"),
+                  degree: localStorage.getItem("degreeValue"),
+                  due_date: localStorage.getItem("endEducationDate"),
+                  description: localStorage.getItem("educationDescription"),
+                },
+              ],
+              // image: new Blob([localStorage.getItem("selectedImage")], {
+              //   type: "image/jpeg",
+              // }),
+              image: localStorage.getItem("selectedImage"),
+              aboutMe: localStorage.getItem("aboutMe"),
+            }),
+          }
+        );
+
+        // if (!response.ok) {
+        //   throw new Error("Something went wrong");
+        // }
+
+        const data = await response.json();
+        console.log(data);
+      };
+      postData();
+
+      // const postData = async () => {
+      //   const imageFile = localStorage.getItem("selectedImage");
+
+      //   // Convert the image string into a Blob object
+      //   const imageBlob = new Blob([imageFile], { type: "image/jpeg" });
+
+      //   const formData = new FormData();
+      //   formData.append("token", localStorage.getItem("token"));
+      //   formData.append("name", localStorage.getItem("name"));
+      //   formData.append("surname", localStorage.getItem("surname"));
+      //   formData.append("email", localStorage.getItem("email"));
+      //   formData.append("phone_number", localStorage.getItem("phone"));
+      //   formData.append(
+      //     "experiences",
+      //     JSON.stringify([
+      //       {
+      //         position: localStorage.getItem("position"),
+      //         employer: localStorage.getItem("employer"),
+      //         start_date: localStorage.getItem("startDate"),
+      //         due_date: localStorage.getItem("endDate"),
+      //         description: localStorage.getItem("description"),
+      //       },
+      //     ])
+      //   );
+      //   formData.append(
+      //     "educations",
+      //     JSON.stringify([
+      //       {
+      //         degree_id: degreeValueID,
+      //         institute: localStorage.getItem("school"),
+      //         degree: localStorage.getItem("degreeValue"),
+      //         due_date: localStorage.getItem("endEducationDate"),
+      //         description: localStorage.getItem("educationDescription"),
+      //       },
+      //     ])
+      //   );
+      //   formData.append("image", imageBlob, "image.jpg");
+      //   formData.append("aboutMe", localStorage.getItem("aboutMe"));
+
+      //   const response = await fetch(
+      //     "https://resume.redberryinternship.ge/api/cvs",
+      //     {
+      //       method: "POST",
+      //       body: formData,
+      //     }
+      //   );
+
+      //   if (!response.ok) {
+      //     throw new Error(`Response not OK: ${response.status}`);
+      //   }
+
+      //   const data = await response.json();
+      //   console.log(data);
+      // };
+
+      // postData();
+
       navigateNext("/resume");
     }
   };
