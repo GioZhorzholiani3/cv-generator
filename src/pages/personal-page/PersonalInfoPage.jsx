@@ -174,6 +174,7 @@ const PersonalInfoPage = () => {
       !errors.image
     ) {
       navigate("/experience");
+      localStorage.setItem("moveExperience", 1);
     }
   };
 

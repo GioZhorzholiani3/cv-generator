@@ -55,6 +55,10 @@ const EducationForm = (props) => {
     setEndEducationDate(localStorage.getItem("endEducationDate"));
   }, []);
 
+  const addEducationHandler = (e) => {
+    e.preventDefault();
+  };
+
   const getEduEndDataHandler = (e) => {
     setEndEducationDate(e.target.value);
     localStorage.setItem("endEducationDate", e.target.value);
@@ -166,6 +170,7 @@ const EducationForm = (props) => {
         // const image = new Blob([localStorage.getItem("selectedImage")], {
         //   type: "image/jpeg",
         // });
+
         const response = await fetch(
           "https://resume.redberryinternship.ge/api/cvs",
           {
@@ -274,6 +279,7 @@ const EducationForm = (props) => {
       // postData();
 
       navigateNext("/resume");
+      localStorage.setItem("moveFinish", 1);
     }
   };
 
@@ -365,7 +371,10 @@ const EducationForm = (props) => {
           <div className="exp-line"></div>
 
           <div>
-            <button className="add-experience-btn">
+            <button
+              onClick={addEducationHandler}
+              className="add-experience-btn"
+            >
               სხვა სასწავლებლის დამატება
             </button>
           </div>

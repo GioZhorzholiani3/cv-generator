@@ -3,6 +3,10 @@ import "./Welcome.css";
 import { Link } from "react-router-dom";
 
 const Welcome = () => {
+  const routeHandler = () => {
+    localStorage.setItem("movePersonalInfo", 1);
+  };
+
   return (
     <div className="bg-img">
       <div className="app">
@@ -11,7 +15,7 @@ const Welcome = () => {
           <div className="line"></div>
         </div>
         <div className="add-resume">
-          <button className="add-resume-btn">
+          <button onClick={routeHandler} className="add-resume-btn">
             <Link className="add-resume-link" to="/personal-info">
               რეზიუმეს დამატება
             </Link>

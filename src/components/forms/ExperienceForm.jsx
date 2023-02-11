@@ -26,6 +26,10 @@ const ExperienceForm = (props) => {
     setDescription(localStorage.getItem("description"));
   }, []);
 
+  const addExperienceHandler = (e) => {
+    e.preventDefault();
+  };
+
   const positionHandler = (e) => {
     setPosition(e.target.value);
     localStorage.setItem("position", e.target.value);
@@ -117,6 +121,7 @@ const ExperienceForm = (props) => {
       !errors.description
     ) {
       navigateNext("/education");
+      localStorage.setItem("moveEducation", 1);
     }
   };
   return (
@@ -212,7 +217,10 @@ const ExperienceForm = (props) => {
           <div className="exp-line"></div>
 
           <div>
-            <button className="add-experience-btn">
+            <button
+              onClick={addExperienceHandler}
+              className="add-experience-btn"
+            >
               მეტი გამოცდილების დამატება
             </button>
           </div>
