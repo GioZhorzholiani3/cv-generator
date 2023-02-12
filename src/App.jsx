@@ -12,7 +12,6 @@ function App() {
       <Route path="/" element={<Navigate to="/welcome" />} />
       <Route path="/welcome" element={<Welcome />} />
       <Route path="/personal-info" element={<PersonalInfoPage />} />
-
       <Route path="/experience" element={<Experience />} />
       <Route path="/education" element={<Education />} />
       <Route path="/resume" element={<FinishPage />} />
