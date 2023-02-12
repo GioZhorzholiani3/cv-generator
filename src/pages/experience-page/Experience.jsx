@@ -43,8 +43,6 @@ const Experience = () => {
     localStorage.clear();
   };
 
-  // console.log(workDescriptionFromChild);
-
   return (
     <div className="wrap-exp-page">
       <div className="exp-left">

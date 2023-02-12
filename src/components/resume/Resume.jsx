@@ -5,7 +5,6 @@ import { useState } from "react";
 import "./Resume.css";
 
 const Resume = (props) => {
-  // console.log(props.onWorkDescription);
   useEffect(() => {
     setResumeName(localStorage.getItem("name"));
     setResumeSurname(localStorage.getItem("surname"));
@@ -21,12 +20,6 @@ const Resume = (props) => {
     setResSchoolDegree(localStorage.getItem("degreeValue"));
     setResSchoolEndDate(localStorage.getItem("endEducationDate"));
     setResEducationDescription(localStorage.getItem("educationDescription"));
-    // setImage(localStorage.getItem("selectedImage"));
-
-    // const storedImage = localStorage.getItem("selectedImage");
-    // if (storedImage) {
-    //   setImage(URL.createObjectURL(storedImage));
-    // }
 
     const storedImage = localStorage.getItem("selectedImage");
     if (storedImage) {
@@ -50,15 +43,11 @@ const Resume = (props) => {
   const [resEducationDescription, setResEducationDescription] = useState("");
   const [image, setImage] = useState("");
 
-  // console.log(props.onWorkDesctiption);
-
   const style = {
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundImage: props.onImage ? `url(${props.onImage})` : `url(${image})`,
   };
-
-  // console.log(image);
 
   return (
     <div className="wraper">

@@ -243,13 +243,6 @@ const PersonalInfoPage = () => {
           </div>
           <div className="photo-upload">
             <label>პირადი ფოტოს ატვირთვა</label>
-            {/* <button onClick={imageHandler} required>
-              ფოტოს ატვირთვა
-            </button> */}
-            {/* <button onChange={handleFileChange} accept="image/*">
-              atvirtva
-            </button> */}
-            {/* <div> */}
             <input
               type="file"
               id="photo"
@@ -266,14 +259,6 @@ const PersonalInfoPage = () => {
             {errorMessage.image && (
               <p className="error-message">{errorMessage.image}</p>
             )}
-            {/* {selectedImage && <p>{selectedImage.name}</p>}
-            </div> */}
-            {/* {selectedImage && (
-              <div>
-                <p>Selected Image:</p>
-                <img src={selectedImage} alt="Selected" />
-              </div>
-            )} */}
           </div>
           <div className="about-me">
             <p>ჩემ შესახებ (არასავალდებულო)</p>
@@ -304,7 +289,6 @@ const PersonalInfoPage = () => {
             {!errorMessage.email && (
               <span>უნდა მთავრდებოდეს @redberry.ge-ით</span>
             )}
-            {/* <span> უნდა მთავრდებოდეს @redberry.ge-ით </span> */}
           </div>
           <div className="phone">
             <label htmlFor="phone">მობილურის ნომერი</label>
@@ -326,7 +310,6 @@ const PersonalInfoPage = () => {
             {!errorMessage.phoneNumber && (
               <span>უნდა აკმაყოფილებდეს ქართული მობილური ნომრის ფორმატს</span>
             )}
-            {/* <span> უნდა აკმაყოფილებდეს ქართული მობილური ნომრის ფორმატს </span> */}
           </div>
           <div className="next">
             <button onClick={nextPageHandler}>შემდეგი</button>
